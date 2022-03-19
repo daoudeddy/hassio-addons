@@ -1,10 +1,8 @@
 name: Build ZeroNS from latest release
 
 on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+  schedule:
+    - cron: '0 12 * * 1,3,5'
 
 env:
   CARGO_TERM_COLOR: always
@@ -17,28 +15,24 @@ jobs:
     outputs:
       run_build: ${{ steps.run_build.outputs.run_build }}
       release_tag: ${{ steps.zeronsd.outputs.tag }}
+      release_id: ${{ steps.zeronsd.outputs.id }}
       
     steps:
-    - uses: oprypin/find-latest-tag@v1
+    - name: Get latest release on this repo
+      uses: oprypin/find-latest-tag@v1
       id: zerons-addon
       with:
         repository: daoudeddy/zerons-addon
         releases-only: true
-    - uses: oprypin/find-latest-tag@v1
+        
+    - name: Get latest release on ZeroNS repo
+      uses: oprypin/find-latest-tag@v1
       id: zeronsd
       with:
         repository: zerotier/zeronsd
         releases-only: true
-      env:
-        TAG: ${{ steps.zeronsd.outputs.tag }}
-      
-    - run: echo "ZeroNS is at version ${{ steps.zeronsd.outputs.tag }}"
-    - run: echo "ZeroNS-Addon is at version ${{ steps.zerons-addon.outputs.tag }}"
-    
-    - run: echo "release.tag=${{ steps.zeronsd.outputs.tag }}" >> $GITHUB_ENV
-    - run: echo "ZeroNS-Addon is at version ${{ env.TAG }}"
 
-    - name: Create Release
+    - name: Create release if ZeroNS has a new tag
       if: ${{ steps.zeronsd.outputs.tag != steps.zerons-addon.outputs.tag }}
       id: create_release
       uses: actions/create-release@v1.0.0
@@ -79,8 +73,8 @@ jobs:
       
       - uses: actions/checkout@v3
         with:
-          repository: 'daoudeddy/zeronsd'
-#           ref: ${{  needs.release.outputs.release_tag }}
+          repository: 'zerotier/zeronsd'
+          ref: ${{ needs.release.outputs.release_tag }}
 
       - uses: actions-rs/toolchain@v1
         with:
@@ -108,6 +102,6 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
             tag_name: ${{  needs.release.outputs.release_tag }}
-            files: 'zeronsd-${{  needs.release.outputs.release_tag }}-${{ matrix.name }}.tar.gz'
+            files: 'zeronsd-${{ needs.release.outputs.release_tag }}-${{ matrix.name }}.tar.gz'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
