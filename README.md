@@ -73,7 +73,7 @@ SOFTWARE.
 [i386-shield]: https://img.shields.io/badge/i386-yes-green.svg
 [commits-shield]: https://img.shields.io/github/commit-activity/y/daoudeddy/zerons-addon.svg
 [commits]: https://github.com/daoudeddy/zerons-addon/commits/main
-[docs]: DOCS.md
+[docs]: zerons/DOCS.md
 [github-actions-shield]: https://github.com/daoudeddy/zerons-addon/actions/workflows/build.yml/badge.svg
 [github-actions]: https://github.com/daoudeddy/zerons-addon/actions
 [releases-shield]: https://img.shields.io/github/release/daoudeddy/zerons-addon.svg
