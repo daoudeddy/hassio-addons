@@ -75,7 +75,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           repository: 'zerotier/zeronsd'
-          ref: ${{ needs.release.outputs.release_tag }}
+          #ref: ${{ needs.release.outputs.release_tag }}
 
       - uses: actions-rs/toolchain@v1
         with:
