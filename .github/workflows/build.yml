@@ -3,7 +3,8 @@ name: Build ZeroNS from latest release
 on:
   schedule:
     - cron: '0 12 * * 1,3,5'
-
+  workflow_dispatch:
+  
 env:
   CARGO_TERM_COLOR: always
 
