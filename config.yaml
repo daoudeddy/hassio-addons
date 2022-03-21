@@ -1,0 +1,30 @@
+name: ZeroNS
+version: 20220320
+slug: zerons
+description: ZeroNS is a name service centered around the ZeroTier Central API
+url: https://github.com/daoudeddy/zerons-addon
+startup: services
+init: false
+arch:
+  - aarch64
+  - amd64
+  - armv7
+  - i386
+host_network: true
+options:
+  network: ""
+  api_auth_token: ""
+  app_auth_token: ""
+  domain: ""
+  wildcard: false
+  hosts: []
+  log_level: ""
+schema:
+  domain: str
+  network: str
+  api_auth_token: str
+  app_auth_token: str
+  wildcard: bool
+  log_level: list(trace|debug|info|warning|error|fatal)?
+  hosts:
+    - str?
