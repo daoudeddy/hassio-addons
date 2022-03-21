@@ -96,7 +96,7 @@ jobs:
         shell: bash
         run: |
           cd target/${{ matrix.target }}/release          
-          tar czvf ../../../zeronsd-${{  needs.release.outputs.release_tag }}-${{ matrix.name }}.tar.gz zeronsd
+          tar czvf ../../../zeronsd-${{ matrix.name }}.tar.gz zeronsd
           
       - name: Publish
         uses: softprops/action-gh-release@v1
