@@ -102,6 +102,6 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
             tag_name: ${{  needs.release.outputs.release_tag }}
-            files: 'zeronsd-${{ needs.release.outputs.release_tag }}-${{ matrix.name }}.tar.gz'
+            files: 'zeronsd-${{ matrix.name }}.tar.gz'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
