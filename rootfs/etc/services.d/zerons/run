@@ -6,7 +6,10 @@ declare logLevel
 declare wildcard
 declare -a options
 
-logLevel=$(bashio::config 'log_level')
+# Get the log level from config
+logLevel = $(bashio::config 'log_level')
+# Get the network id from config
+network = $(bashio::config 'network')
 
 # Set domain name
 if bashio::config.has_value 'domain'; then
@@ -20,11 +23,13 @@ if bashio::config.has_value 'wildcard'; then
     if ${wildcard}; then options+=(-w); fi
 fi
 
+# Set the zerons arguments
 options+=(-t /etc/zerons/token)
 options+=(-s /etc/zerons/authtoken.secret)
 options+=(-f /etc/zerons/hosts)
-options+=("$(bashio::config 'network')")
+options+=network
 
+# Support for rust logger
 export RUST_LOG=$logLevel
 
 zeronsd start "${options[@]}" < /dev/null

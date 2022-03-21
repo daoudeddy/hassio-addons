@@ -4,7 +4,9 @@ declare appToken
 declare apiToken
 declare hosts
 
+# Create a comfig dir
 mkdir -p /etc/zerons
+# Create a hosts file
 touch /etc/zerons/hosts
 
 # Set the auth token for the ZeroTier Central API
