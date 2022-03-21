@@ -38,8 +38,8 @@ app_auth_token: '!secret zerotier_app_token'
 domain: example.com
 wildcard: false
 hosts:
-  # IP addr            subdomain
-  - 192.168.0.100      hassio
+  # zerotier user IP   Subdomain
+  - 127.20.0.1      hassio
 log_level: info
 ```
 
@@ -85,7 +85,7 @@ Create this token in your [ZeroTier Account Manager](https://my.zerotier.com/acc
 
 ### Option: `domain`
 
-Domain will set a TLD for your records; the default is home.arpa.
+Domain will set a TLD for your records, default is home.arpa.
 
 ### Option: `hosts`
 
