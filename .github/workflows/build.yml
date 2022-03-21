@@ -1,0 +1,107 @@
+name: Build ZeroNS from latest release
+
+on:
+  schedule:
+    - cron: '0 12 * * 1,3,5'
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  release:
+    name: Create Github Release
+    runs-on: ubuntu-latest
+    
+    outputs:
+      run_build: ${{ steps.run_build.outputs.run_build }}
+      release_tag: ${{ steps.zeronsd.outputs.tag }}
+      release_id: ${{ steps.zeronsd.outputs.id }}
+      
+    steps:
+    - name: Get latest release on this repo
+      uses: oprypin/find-latest-tag@v1
+      id: zerons-addon
+      with:
+        repository: daoudeddy/zerons-addon
+        releases-only: true
+        
+    - name: Get latest release on ZeroNS repo
+      uses: oprypin/find-latest-tag@v1
+      id: zeronsd
+      with:
+        repository: zerotier/zeronsd
+        releases-only: true
+
+    - name: Create release if ZeroNS has a new tag
+      if: ${{ steps.zeronsd.outputs.tag != steps.zerons-addon.outputs.tag }}
+      id: create_release
+      uses: actions/create-release@v1.0.0
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ steps.zeronsd.outputs.tag }}
+        release_name: ZeroNS ${{ steps.zeronsd.outputs.tag }}
+        draft: false
+        prerelease: false
+        
+    - name: Set output
+      id: run_build
+      run: echo "::set-output name=run_build::${{ steps.zeronsd.outputs.tag != steps.zerons-addon.outputs.tag }}"
+      
+  build:
+    needs: release
+    if: needs.release.outputs.run_build == 'true'
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - name: aarch64
+            target: aarch64-unknown-linux-musl
+            cross: true
+          - name: armv7
+            target: armv7-unknown-linux-musleabihf
+            cross: true
+          - name: i386
+            target: i686-unknown-linux-musl
+            cross: true
+          - name: amd64
+            target: x86_64-unknown-linux-musl
+            cross: true
+
+    steps:
+      - run: echo ${{ needs.release.outputs.release_tag }}
+      
+      - uses: actions/checkout@v3
+        with:
+          repository: 'zerotier/zeronsd'
+          ref: ${{ needs.release.outputs.release_tag }}
+
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          profile: minimal
+          override: ${{ matrix.cross }}
+          target: ${{ matrix.target }}
+          
+      - uses: Swatinem/rust-cache@v1
+      
+      - name: Build target
+        uses: actions-rs/cargo@v1
+        with:
+          use-cross: ${{ matrix.cross }}
+          command: build
+          args: --release --target ${{ matrix.target }}
+          
+      - name: Package
+        shell: bash
+        run: |
+          cd target/${{ matrix.target }}/release          
+          tar czvf ../../../zeronsd-${{  needs.release.outputs.release_tag }}-${{ matrix.name }}.tar.gz zeronsd
+          
+      - name: Publish
+        uses: softprops/action-gh-release@v1
+        with:
+            tag_name: ${{  needs.release.outputs.release_tag }}
+            files: 'zeronsd-${{ needs.release.outputs.release_tag }}-${{ matrix.name }}.tar.gz'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
