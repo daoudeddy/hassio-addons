@@ -1,5 +1,5 @@
 name: ZeroNS
-version: 20220320
+version: 20220321
 slug: zerons
 description: ZeroNS is a name service centered around the ZeroTier Central API
 url: https://github.com/daoudeddy/zerons-addon
