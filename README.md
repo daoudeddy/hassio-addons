@@ -34,7 +34,7 @@ ZeroNS provides names that are a part of [ZeroTier Central's](https://my.zerotie
 Navigate in your Home Assistant frontend to **Supervisor** -> **Add-on Store** and add this URL as an additional repository:
 
 ```txt
-https://github.com/daoudeddy/zerons-addon
+https://github.com/daoudeddy/hassio-addons
 ```
 or you can add it by clicking the
 button below.
@@ -71,12 +71,12 @@ SOFTWARE.
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
 [armv7-shield]: https://img.shields.io/badge/armv7-yes-green.svg
 [i386-shield]: https://img.shields.io/badge/i386-yes-green.svg
-[commits-shield]: https://img.shields.io/github/commit-activity/y/daoudeddy/zerons-addon.svg
+[commits-shield]: https://img.shields.io/github/commit-activity/y/daoudeddy/hassio-addons.svg
 [commits]: https://github.com/daoudeddy/zerons-addon/commits/main
 [docs]: zerons/DOCS.md
 [github-actions-shield]: https://github.com/daoudeddy/zerons-addon/actions/workflows/build.yml/badge.svg
 [github-actions]: https://github.com/daoudeddy/zerons-addon/actions
-[releases-shield]: https://img.shields.io/github/release/daoudeddy/zerons-addon.svg
+[releases-shield]: https://img.shields.io/github/release/daoudeddy/hassio-addons.svg
 [releases]: https://github.com/daoudeddy/zerons-addon/releases
 [repository-badge]: https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg
-[repository]: https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Fdaoudeddy%2Fzerons-addon
+[repository]: https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Fdaoudeddy%2Fhassio-addons
