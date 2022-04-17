@@ -1,4 +1,8 @@
 # Changelog
+## 20200417
+
+- Update ZeroNS to [v0.4.3](https://github.com/zerotier/zeronsd/releases/tag/v0.4.3)
+
 ## 20200406
 
 - Update ZeroNS to [v0.4.2](https://github.com/zerotier/zeronsd/releases/tag/v0.4.2)
