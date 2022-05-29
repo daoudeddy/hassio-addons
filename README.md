@@ -11,7 +11,7 @@
 
 [![GitHub Activity][commits-shield]][commits]
 
-Zerotier ZeroNS home assistant addon
+Zerotier ![ZeroNS][zerons] home assistant addon
 
 ## About
 
@@ -80,3 +80,4 @@ SOFTWARE.
 [releases]: https://github.com/daoudeddy/zerons-addon/releases
 [repository-badge]: https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg
 [repository]: https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Fdaoudeddy%2Fhassio-addons
+[zerons]: https://github.com/zerotier/zeronsd
