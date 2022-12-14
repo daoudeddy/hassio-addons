@@ -70,6 +70,9 @@ jobs:
             cross: true
 
     steps:
+      - name: Install openssl-dev
+        run: sudo apt-get install -y openssl openssl-dev
+
       - run: echo ${{ needs.release.outputs.release_tag }}
       
       - uses: actions/checkout@v3
