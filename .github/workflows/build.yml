@@ -70,8 +70,8 @@ jobs:
             cross: true
 
     steps:
-      - name: Install openssl-dev
-        run: sudo apt-get install -y openssl openssl-dev
+      - name: Install openssl
+        run: sudo apt-get install -y openssl pkg-config libssl-dev
 
       - run: echo ${{ needs.release.outputs.release_tag }}
       
