@@ -71,7 +71,7 @@ jobs:
 
     steps:
       - name: Install openssl
-        run: sudo apt-get install -y openssl pkg-config libssl-dev
+        run: sudo apt-get install -y openssl pkg-config libssl-dev perl
 
       - run: echo ${{ needs.release.outputs.release_tag }}
       
