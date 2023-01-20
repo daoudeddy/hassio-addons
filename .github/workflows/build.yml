@@ -77,19 +77,11 @@ jobs:
           repository: 'zerotier/zeronsd'
           #ref: ${{ needs.release.outputs.release_tag }}
 
-      - uses: actions-rs/toolchain@v1
+      - name: Install cross-compilation tools
+        uses: taiki-e/setup-cross-toolchain-action@v1
         with:
-          toolchain: stable
-          profile: minimal
-          override: ${{ matrix.cross }}
           target: ${{ matrix.target }}
-      
-      - name: Build target
-        uses: actions-rs/cargo@v1
-        with:
-          use-cross: ${{ matrix.cross }}
-          command: build
-          args: --release --target ${{ matrix.target }}
+      - run: cargo build --release --features vendored-openssl
 
       - name: Package
         shell: bash
