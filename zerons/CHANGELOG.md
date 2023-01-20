@@ -1,13 +1,17 @@
 # Changelog
-## 20200605
-
-- Revert to ZeroNS to [v0.4.3](https://github.com/zerotier/zeronsd/releases/tag/v0.5.2)
-
-## 20200529
+## 20230120
 
 - Update ZeroNS to [v0.5.2](https://github.com/zerotier/zeronsd/releases/tag/v0.5.2)
 
-## 20200516
+## 20220605
+
+- Revert to ZeroNS to [v0.4.3](https://github.com/zerotier/zeronsd/releases/tag/v0.5.2)
+
+## 20220529
+
+- Update ZeroNS to [v0.5.2](https://github.com/zerotier/zeronsd/releases/tag/v0.5.2)
+
+## 20220516
 
 - Update ZeroNS to [v0.5.1](https://github.com/zerotier/zeronsd/releases/tag/v0.5.1)
 
