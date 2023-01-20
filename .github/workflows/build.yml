@@ -94,7 +94,7 @@ jobs:
         with:
           use-cross: ${{ matrix.cross }}
           command: build
-          args: --release --features vendored-openssl --target ${{ matrix.target }}
+          args: --release --target ${{ matrix.target }}
 
 
           
