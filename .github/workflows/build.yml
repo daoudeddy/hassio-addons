@@ -71,7 +71,7 @@ jobs:
 
     steps:
       - name: Install openssl
-        run: dpkg --add-architecture armhf && dpkg --add-architecture i386 && dpkg --add-architecture armv64 && apt-get install -y libssl-dev:arm64 libssl-dev:armhf libssl-dev:i386
+        run: sudo dpkg --add-architecture armhf && sudo dpkg --add-architecture i386 && sudo dpkg --add-architecture armv64 && sudo apt-get install -y libssl-dev:arm64 libssl-dev:armhf libssl-dev:i386
 
       - run: echo ${{ needs.release.outputs.release_tag }}
       
