@@ -70,9 +70,6 @@ jobs:
             cross: true
 
     steps:
-      - name: Install openssl
-        run: sudo dpkg --add-architecture armhf && sudo dpkg --add-architecture i386 && sudo dpkg --add-architecture armv64 && sudo apt-get install -y libssl-dev:arm64 libssl-dev:armhf libssl-dev:i386
-
       - run: echo ${{ needs.release.outputs.release_tag }}
       
       - uses: actions/checkout@v3
@@ -86,8 +83,6 @@ jobs:
           profile: minimal
           override: ${{ matrix.cross }}
           target: ${{ matrix.target }}
-          
-      - uses: Swatinem/rust-cache@v1
       
       - name: Build target
         uses: actions-rs/cargo@v1
@@ -96,8 +91,6 @@ jobs:
           command: build
           args: --release --target ${{ matrix.target }}
 
-
-          
       - name: Package
         shell: bash
         run: |
