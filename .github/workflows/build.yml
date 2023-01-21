@@ -85,16 +85,23 @@ jobs:
 
       - run: cargo build --release --features vendored-openssl
 
-      - name: Package
+      - name: Package Cross
         shell: bash
+        if: ${{ matrix.cross }}
         run: |
           cd target/${{ matrix.target }}/release          
           tar czvf ../../../zeronsd-${{ matrix.name }}.tar.gz zeronsd
+
+      - name: Package
+        shell: bash
+        run: |
+          cd target/release          
+          tar czvf ../../zeronsd-${{ matrix.name }}.tar.gz zeronsd
           
       - name: Publish
         uses: softprops/action-gh-release@v1
         with:
-            tag_name: ${{  needs.release.outputs.release_tag }}
+            tag_name: ${{ needs.release.outputs.release_tag }}
             files: 'zeronsd-${{ matrix.name }}.tar.gz'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
