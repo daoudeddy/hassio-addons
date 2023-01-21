@@ -94,6 +94,7 @@ jobs:
 
       - name: Package
         shell: bash
+        if: ${{ !matrix.cross }}
         run: |
           cd target/release          
           tar czvf ../../zeronsd-${{ matrix.name }}.tar.gz zeronsd
