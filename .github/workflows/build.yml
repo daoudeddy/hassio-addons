@@ -11,7 +11,7 @@ env:
 jobs:
   release:
     name: Create Github Release
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     
     outputs:
       run_build: ${{ steps.run_build.outputs.run_build }}
