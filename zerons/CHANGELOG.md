@@ -1,6 +1,12 @@
 # Changelog
 ## 20230120
 
+- Fix files permission
+- Fix Cross compilation
+- Update ZeroNS to [v0.5.2](https://github.com/zerotier/zeronsd/releases/tag/v0.5.2)
+
+## 20230120
+
 - Update ZeroNS to [v0.5.2](https://github.com/zerotier/zeronsd/releases/tag/v0.5.2)
 
 ## 20220605
