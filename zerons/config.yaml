@@ -25,6 +25,6 @@ schema:
   api_auth_token: str
   app_auth_token: str
   wildcard: bool
-  log_level: list(trace|debug|info|warning|error|fatal)?
+  log_level: list(off|trace|debug|error|warn|info)?
   hosts:
     - str?
