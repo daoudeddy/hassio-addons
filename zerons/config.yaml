@@ -1,5 +1,5 @@
 name: ZeroNS
-version: 20230121
+version: 20230122
 slug: zerons
 description: ZeroNS is a name service centered around the ZeroTier Central API
 url: https://github.com/daoudeddy/zerons-addon
@@ -8,7 +8,7 @@ init: false
 arch:
   - aarch64
   - amd64
-  - armv7
+#   - armv7
   - i386
 host_network: true
 options:
