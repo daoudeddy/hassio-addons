@@ -57,33 +57,46 @@ jobs:
       matrix:
         include:
           - name: aarch64
-            target: aarch64-unknown-linux-gnu
-            cross: true
+            target: aarch64-unknown-linux-musl
+            toolchain: aarch64-linux-musl-cross.tgz
           - name: armv7
-            target: armv7-unknown-linux-gnueabihf
-            cross: true
+            target: armv7-unknown-linux-musleabihf
+            toolchain: arm-linux-musleabihf-cross.tgz
           - name: i386
-            target: i686-unknown-linux-gnu
-            cross: true
+            target: i686-unknown-linux-musl
+            toolchain: i686-linux-musl-cross.tgz
           - name: amd64
-            target: x86_64-unknown-linux-gnu
-            cross: false
+            target: x86_64-unknown-linux-musl
+            toolchain: x86_64-linux-musl-cross.tgz
 
-    steps:
-      - run: echo ${{ needs.release.outputs.release_tag }}
-      
+    steps:      
       - uses: actions/checkout@v3
         with:
           repository: 'zerotier/zeronsd'
           #ref: ${{ needs.release.outputs.release_tag }}
-
-      - name: Install cross-compilation tools
-        if: ${{ matrix.cross }}
-        uses: taiki-e/setup-cross-toolchain-action@v1
+      
+      - uses: actions/checkout@v3
         with:
-          target: ${{ matrix.target }}
-
-      - run: cargo build --release --features vendored-openssl
+          repository: 'daoudeddy/zeronsd'
+          #ref: ${{ needs.release.outputs.release_tag }}
+          
+      - name: Add rust toolchain
+        run: rustup target add ${{ matrix.target }}
+      - name: Download toolchain
+        run: wget https://musl.cc/${{ matrix.toolchain }}
+      - name: Create toolchain directory
+        run: mkdir ${HOME}/toolchain-${{ matrix.name }}
+      - name: Extract toolchain
+        run: tar xvf ${{ matrix.toolchain }} --strip-components=1 -C ${HOME}/toolchain-${{ matrix.name }}
+        
+      - name: Export toolchain to PATH
+        run: echo "${HOME}/toolchain-${{ matrix.name }}/bin" >> $GITHUB_PATH
+      
+      - name: build
+        env:
+          PKG_CONFIG_SYSROOT_DIR: "/"
+          PKG_CONFIG_ALLOW_CROSS: 1
+        run: cargo build --target ${{ matrix.target }} --features vendored-openssl --release
 
       - name: Package Cross
         shell: bash
