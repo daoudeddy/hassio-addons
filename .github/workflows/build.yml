@@ -79,7 +79,8 @@ jobs:
         with:
           repository: 'daoudeddy/zeronsd'
           #ref: ${{ needs.release.outputs.release_tag }}
-          
+      - name: Install dependencies  
+        run: sudo apt-get install musl-tools
       - name: Add rust toolchain
         run: rustup target add ${{ matrix.target }}
       - name: Download toolchain
