@@ -106,17 +106,9 @@ jobs:
 
       - name: Package Cross
         shell: bash
-        if: ${{ matrix.cross }}
         run: |
           cd target/${{ matrix.target }}/release          
           tar czvf ../../../zeronsd-${{ matrix.name }}.tar.gz zeronsd
-
-      - name: Package
-        shell: bash
-        if: ${{ !matrix.cross }}
-        run: |
-          cd target/release          
-          tar czvf ../../zeronsd-${{ matrix.name }}.tar.gz zeronsd
           
       - name: Publish
         uses: softprops/action-gh-release@v1
