@@ -1,5 +1,11 @@
 # Changelog
-## 20230120
+## 20230122
+
+- Fix Cross compilation
+- Removed armv7 support for now
+- Update ZeroNS to [v0.5.2](https://github.com/zerotier/zeronsd/releases/tag/v0.5.2)
+
+## 20230121
 
 - Fix files permission
 - Fix Cross compilation
